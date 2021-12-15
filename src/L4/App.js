@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import Post from './Post';
 import PostList from './PostList';
 import Tasks from './Tasks';
+import Gallery from './Gallery';
+import Matrix from './Matrix';
 
 function App() {
   const [userQuery, setUserQuery] = useState('');
+  const [showGallery, setShowGallery] = useState(true);
 
   const updateUserQuery = (event) => {
     setUserQuery(event.target.value);
@@ -16,6 +19,10 @@ function App() {
 
   const searchQuery = () => {
     window.open(`https://google.com/search?q=${userQuery}`, '_blank');
+  }
+
+  const toggleShowGallery = () => {
+    setShowGallery(!showGallery);
   }
 
   return (
@@ -30,7 +37,18 @@ function App() {
       <hr />
       <Tasks />
       <hr />
+      <div>
+        {
+          showGallery ? <Gallery /> : null
+        }
+        <button onClick={toggleShowGallery}>
+          {showGallery ? 'Hide' : 'Show'} Gallery
+        </button>
+      </div>
+      <hr />
       <PostList />
+      <hr />
+      <Matrix />
     </div>
   );
 }
